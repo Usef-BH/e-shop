@@ -1,0 +1,39 @@
+@font-face {
+    font-family: 'FontAwesome';
+    font-style: normal;
+    font-weight: normal;
+    src: url(/third_party/fontawesome-webfont.woff) format('woff');
+  }
+  
+  .fontawesome-twitter:before{content:"\f099"}.fontawesome-github:before{content:"\f09b"}.fontawesome-envelope-alt:before{content:"\f0e0"}
+  
+
+/* fontawesome */
+[class*="fontawesome-"]:before {
+    font-family: 'FontAwesome', sans-serif;
+  }
+
+* {
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    font-family: hallosans,Futura,HelveticaNeue-Light,Helvetica Neue Light,Helvetica Neue,Helvetica,Open Sans,sans-serif;
+}
+
+@font-face {
+    font-family: hallosans;
+    src: url(/third_party/hallo_sans.otf) format("opentype");
+    font-weight: 400;
+    font-style: normal;
+    font-display: optional
+}
+
+#app {
+    display: grid;
+    grid-template-rows: 100px minmax(calc(100vh - 180px),auto) 40px;
+    grid-gap: 20px;
+}
+

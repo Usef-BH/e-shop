@@ -1,0 +1,9 @@
+footer {
+    display: grid;
+    grid-template-columns: auto repeat(3, 40px);
+    align-items: center;
+}
+
+footer * {
+    padding: 5px;
+}
