@@ -1,0 +1,40 @@
+.cart_list {
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    list-style: none;
+    display: grid;
+    grid-auto-rows: 70px;
+    align-items: center;
+    grid-gap: 5px;
+}
+
+.cat_title {
+    width: 80vw;
+    padding: 5px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+}
+
+.list_item {
+    background-color: #f0f1f4;
+    border: 0.5px outset;
+    border-radius: 5px;
+    padding: 18px;
+}
+
+button {
+    float: right;
+    padding: 5px;
+    font-size: 20px;
+    cursor: pointer;
+    background: none;
+    border: none;
+}
+
+button:hover {
+    background-color: #5897f9;
+    border-radius: 5px;
+    transform: scale(1.5);
+}

@@ -5,7 +5,7 @@
     src: url(/third_party/fontawesome-webfont.woff) format('woff');
   }
   
-  .fontawesome-twitter:before{content:"\f099"}.fontawesome-github:before{content:"\f09b"}.fontawesome-envelope-alt:before{content:"\f0e0"}
+.fontawesome-twitter:before{content:"\f099"}.fontawesome-github:before{content:"\f09b"}.fontawesome-envelope-alt:before{content:"\f0e0"}.fontawesome-trash:before{content:"\f014"}
   
 
 /* fontawesome */
