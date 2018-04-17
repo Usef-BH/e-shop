@@ -7,17 +7,21 @@ export default class Cart extends React.Component {
 
     removeItem(id) {
         this.props.store.dispatch({type: 'REMOVE_ITEM', id });
+        document.activeElement.blur();
+        document.activeElement.focus();
     }
 
     render() {
         let { store } = this.props;
         console.log("store.getState: ", store.getState());
         return (
-        <div>
+        <div className={styles.cart_container}>
             <h1 className={styles.cat_title}>Hello in Cart view!</h1>
             <ul className={styles.cart_list}>
-                {store.getState().map((item, index) => <li key={index} className={styles.list_item}>{item.title}
-                <button className="fontawesome-trash" onClick={() => this.removeItem(item.id)} role="Remove item from cart"></button>
+                {store.getState().map((item, index) => <li key={index}
+                className={styles.list_item}>{item.title}
+                <button className="fontawesome-trash" role="Remove item from cart"
+                onClick={() => this.removeItem(item.id)} ></button>
                 </li>)}   
             </ul>
         </div>

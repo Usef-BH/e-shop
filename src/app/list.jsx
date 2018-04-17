@@ -39,7 +39,7 @@ export class List extends React.Component {
             src = [{img: girl, title: "category"}, ...items];
         } */
         return (
-            <div style={{height: 100 + '%'}}>
+            <div className={styles.list_container}>
                 <h1 style={stylesh1} className={styles.cat_title}>Hello in koko caterogy!</h1>
                 <div className={styles.list}>
                     { src.map((img, index) => (

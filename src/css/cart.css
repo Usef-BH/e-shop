@@ -1,3 +1,7 @@
+.cart_container {
+    margin-top: 120px;
+}
+
 .cart_list {
     width: 80%;
     margin-left: auto;
@@ -33,8 +37,14 @@ button {
     border: none;
 }
 
-button:hover {
+button:active {
     background-color: #5897f9;
     border-radius: 5px;
-    transform: scale(1.5);
+}
+
+@media (hover: hover) {
+    button:hover {
+        background-color: #5897f9;
+        border-radius: 5px;
+    }
 }

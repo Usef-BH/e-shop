@@ -1,11 +1,14 @@
 .header {
+    position: fixed;
+    width: 100%;
     display: grid;
     grid-template-columns: 1fr calc(100% - 120px) 1fr;
-    grid-template-rows: 50px 18px;
-    margin: 16px;
+    grid-template-rows: 50px 28px;
+    padding-top: 10px;
     box-sizing: border-box;
     text-align: center;
     align-items: center;
+    background: linear-gradient(#ffffff, #ffffffdd);
 }
 
 .title {
@@ -49,6 +52,7 @@
 .nav {
     grid-row: 2;
     grid-column: 2;
+    height: 100%;
 }
 
 [class$='overlay'] {
@@ -106,8 +110,8 @@ a {
     .nav {
         z-index: 1;
         position: absolute;
-        top: 0;
-        left: -200px;
+        top: -70px;
+        left: -260px;
         max-width: 200px;
         height: 100vh;
         padding-top: 20px;
@@ -127,5 +131,5 @@ a {
 }
 
 [class$='show_sidebar'] {
-    left: 0;
+    left: -60px;
 }

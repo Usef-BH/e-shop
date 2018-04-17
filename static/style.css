@@ -38,6 +38,6 @@ body {
 #app {
     display: grid;
     grid-template-columns: minmax(288px, auto);
-    grid-template-rows: 100px minmax(calc(100vh - 180px),auto) 40px;
+    grid-template-rows: minmax(calc(100vh - 60px),auto) 40px;
     grid-gap: 20px;
 }
