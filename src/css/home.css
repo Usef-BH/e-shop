@@ -1,0 +1,48 @@
+.main {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    text-align: center;
+    grid-row-gap: 50px;
+    grid-column-gap: 20px;
+}
+
+.men {
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.women {
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.boys {
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.girls {
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+img {
+    width: 100%;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.cat_link {
+    cursor: pointer;
+    border: 1px solid;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.cat_link:hover {
+    background-color: #80808094;
+}

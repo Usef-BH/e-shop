@@ -1,6 +1,6 @@
 .header {
     display: grid;
-    grid-template-columns: 1fr calc(80vw - 32px) 1fr;
+    grid-template-columns: 1fr calc(100% - 120px) 1fr;
     grid-template-rows: 50px 18px;
     margin: 16px;
     box-sizing: border-box;
@@ -13,17 +13,32 @@
     grid-column: 2;
 }
 
-.svg {
+.svg, .svg1 {
     display: block;
     grid-column: 3;
     grid-row: 1;
-    width: 30px;
-    height: 30px;
+    width: 32px;
+    height: 32px;
     padding: 14px;
+    position: relative;
 }
 
-.svg:hover {
-    background-color: gray;
+.svg::after {
+    content: attr(data-after);
+    color: white;
+    border-radius: 50%;
+    position: absolute;
+    bottom: 35px;
+    left: 21px;
+    min-width: 30%;
+    min-height: 30%;
+    padding: 2px;
+    background-color: #ffa700;
+    z-index: -1;
+}
+
+.svg:hover, .svg1:hover {
+    background-color: #80808094;
     border-radius: 50%;
 }
 
@@ -43,7 +58,7 @@
     width: 100%;
     height: 100%;
     background-color: black;
-    opacity: 0.8;
+    opacity: 0.5;
 }
 
 .list_item {
@@ -85,7 +100,7 @@ a {
         font-size: 20px;
     }
     .trigram:hover {
-        background-color: gray;
+        background-color: #80808094;
         border-radius: 50%;
     }
     .nav {

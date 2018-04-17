@@ -27,11 +27,21 @@ module.exports = {
                             }
                         }                    
                 ]
+            },
+            {
+                test: /\.(jpe?g|png|gif)/,
+                use: 'file-loader',
             }
         ]
     },
     devServer: {
         port: 9999,
+        useLocalIp: true,
+        allowedHosts: [
+            '192.168.0.171',
+            '192.168.0.119'
+        ],
+        host: "0.0.0.0",
         contentBase: path.join(__dirname, 'static')
     }
 }
