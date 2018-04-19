@@ -4,7 +4,7 @@ module.exports = {
     mode: 'development',
     entry: './src/app/index.jsx',
     output: {
-        path: path.join(__dirname, 'dist'),
+        path: path.join(__dirname, 'static/dist'),
         filename: 'bundle.js',
         publicPath: 'dist/'
     },

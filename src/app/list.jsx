@@ -40,7 +40,7 @@ export class List extends React.Component {
         } */
         return (
             <div className={styles.list_container}>
-                <h1 style={stylesh1} className={styles.cat_title}>Hello in koko caterogy!</h1>
+                <h1 style={stylesh1} className={styles.cat_title}>Items List</h1>
                 <div className={styles.list}>
                     { src.map((img, index) => (
                     <div key={index} className={styles.item}>

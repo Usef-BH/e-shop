@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,22 +8,24 @@
     <title>Super Shop</title>
     <link rel="stylesheet" href="style.css">
     <link rel="shortcut icon" href="cart.png" type="image/x-icon">
-    <!--style>
-        .fade-enter {
-            /*transform: translateX(-100vw);*/
-            opacity: 0;
-            z-index: 1;
-        }
-        .fade-enter.fade-enter-active {
-            /*transform: translateX(0px);*/
-            opacity: 1;
-            z-index: 1;
-            transition: all 1s ease-in-out;
-        }
-    </style-->
+    <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase-app.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyCNheJ-ADZ4hKkJtzuWsqnNuLERjyXxMKs",
+            authDomain: "super-eshop.firebaseapp.com",
+            databaseURL: "https://super-eshop.firebaseio.com",
+            projectId: "super-eshop",
+            storageBucket: "",
+            messagingSenderId: "168816506244"
+        };
+        firebase.initializeApp(config);
+    </script>
 </head>
+
 <body>
     <div id="app"></div>
     <script src="dist/bundle.js"></script>
 </body>
+
 </html>

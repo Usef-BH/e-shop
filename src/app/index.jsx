@@ -8,18 +8,38 @@ import Main from './main.jsx';
 import Footer from './footer.jsx';
 import items from './mokeData';
 
+let list = items.map(item => {
+    return {
+        id: item.id,
+        price: item.price,
+        title: item.title,
+        quantity: 1
+    }
+})
+
 const reducer = (state=[], action) => {
     switch (action.type) {
         case 'ADD_ITEM':
-        console.log("action.id:", action.id);
+            let index = state.findIndex(ele => ele.id == action.id);
+            if(index !== -1) {
+                state[index].quantity++;
+                return state;
+            }
             return [
                 ...state,
-                items[action.id-1]
+                list[action.id-1]
             ];
-            break;
         case 'REMOVE_ITEM':
-            return state.filter(item => item.id != action.id);
-            break;
+            index = state.findIndex(ele => ele.id == action.id);
+            if(index !== -1) {
+                if(state[index].quantity === 1) {
+                    return state.filter(item => item.id != action.id);   
+                }else {
+                    state[index].quantity--;
+                    return state;
+                }
+            }
+            return state;
         default:
             return state;
     }
