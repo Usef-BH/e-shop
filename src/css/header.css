@@ -116,7 +116,7 @@ a {
         height: 100vh;
         padding-top: 20px;
         box-sizing: border-box;
-        background-color: #418def;
+        background-color: #b8d7ffd6;
         transition: .3s cubic-bezier(0.175, 0.885, 0.32, 1.4);
     }
     .list_item {

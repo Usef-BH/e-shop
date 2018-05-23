@@ -5,25 +5,25 @@ import remove from '../img/trash.svg';
 
 const SHIPPING_OPTIONS = {
     us: [
-      {
-        id: 'standard',
-        label: 'Standard Shipping',
-        price: 0
-      },
-      {
-        id: 'express',
-        label: 'Express Shipping',
-        price: 10
-      }
+        {
+            id: 'standard',
+            label: 'Standard Shipping',
+            price: 0
+        },
+        {
+            id: 'express',
+            label: 'Express Shipping',
+            price: 10
+        }
     ],
     international: [
-      {
-        id: 'international',
-        label: 'International Shipping',
-        price: 15
-      }
+        {
+            id: 'international',
+            label: 'International Shipping',
+            price: 15
+        }
     ]
-  };
+};
 
 export default class Cart extends React.Component {
 
@@ -73,16 +73,36 @@ export default class Cart extends React.Component {
 
         request.addEventListener('shippingaddresschange', e => {
             e.updateWith((_ => {
-              shippingOptions = this.optionsForCountry(request.shippingAddress.country);
-              selectedOption = shippingOptions[0].id;
-              let details = this.buildPaymentDetails(cart, shippingOptions, selectedOption);
-              return Promise.resolve(details);
+                shippingOptions = this.optionsForCountry(request.shippingAddress.country);
+                selectedOption = shippingOptions[0].id;
+                let details = this.buildPaymentDetails(cart, shippingOptions, selectedOption);
+                return Promise.resolve(details);
             })());
-          });
+        });
+
+        request.addEventListener('shippingoptionchange', e => {
+            e.updateWith((_ => {
+                selectedOption = request.shippingOption;
+                let details = this.buildPaymentDetails(cart, shippingOptions, selectedOption);
+                return Promise.resolve(details);
+            })());
+        });
 
         // 2. Show the native UI with `.show()`
-        request.show();
-            // 3. Process the payment
+        return request.show()
+            .then(r => {
+                // The UI will show a spinner to the user until
+                // `request.complete()` is called.
+                let response = r;
+                let data = r.toJSON();
+                setTimeout( () => {
+                    response.complete();
+                    this.createModal();
+                    this.props.store.dispatch({ type: 'REMOVE_ALL'});
+                    console.log(data);
+                }, 2000);
+            });
+        // 3. Process the payment
         /*    .then(result => {
                 // POST the payment information to the server
                 return fetch('/pay', {
@@ -107,6 +127,39 @@ export default class Cart extends React.Component {
             });*/
     }
 
+    createModal() {
+        let template = `<div class="over" tabindex="-1">
+            <div class="modal modal-success" role="dialog" aria-modal="true">   
+                <div class="swal-icon swal-icon--success">
+                    <span class="swal-icon--success__line swal-icon--success__line--long"></span>
+                    <span class="swal-icon--success__line swal-icon--success__line--tip"></span>
+                    <div class="swal-icon--success__ring"></div>
+                    <div class="swal-icon--success__hide-corners"></div>
+                </div>        
+                <span class="greetings">
+                    Thank you for your purchase. See you soon!
+                </span>
+                <button class="ok success">OK</button>
+            </div>
+        </div>`
+        
+        document.body.insertAdjacentHTML('beforeend', template);
+        document.querySelector('.modal').addEventListener("click", (e) => {
+            e.stopPropagation();
+        })
+        document.body.classList.toggle("noscroll");
+        document.querySelector('.over').addEventListener('click', () => {
+            let overlay = document.querySelector('.over')
+            document.body.removeChild(overlay);
+            document.body.classList.toggle("noscroll");
+        });
+        document.querySelector('.ok').addEventListener('click', () => {
+            let overlay = document.querySelector('.over')
+            document.body.removeChild(overlay);
+            document.body.classList.toggle("noscroll");
+        });
+    }
+
     /*
     * Creates the PaymentDetails dictionary inside the PaymentRequest.
     * This can change as the user selects shipping options.
@@ -116,7 +169,7 @@ export default class Cart extends React.Component {
         let displayItems = cart.items.map(item => {
             return {
                 label: item.title,
-                amount: { currency: 'USD', value: String(item.price*item.quantity)}
+                amount: { currency: 'USD', value: String(item.price * item.quantity) }
             }
         })
 
@@ -124,29 +177,31 @@ export default class Cart extends React.Component {
 
         // TODO PAY-7.3 - allow shipping options
         let displayedShippingOptions = [];
-        if(shippingOptions.length > 0) {
-        let selectedOption = shippingOptions.find(option => {
-            return option.id === shippingOptionId;
-        });
-        displayedShippingOptions = shippingOptions.map(option => {
-            return {
-            id: option.id,
-            label: option.label,
-            amount: {currency: 'USD', value: String(option.price)},
-            selected: option.id === shippingOptionId
-            };
-        });
-        if(selectedOption) total += selectedOption.price;
+        if (shippingOptions.length > 0) {
+            let selectedOption = shippingOptions.find(option => {
+                return option.id === shippingOptionId;
+            });
+            displayedShippingOptions = shippingOptions.map(option => {
+                return {
+                    id: option.id,
+                    label: option.label,
+                    amount: { currency: 'USD', value: String(option.price) },
+                    selected: option.id === shippingOptionId
+                };
+            });
+            if (selectedOption) {
+                total += selectedOption.price;
+            }
         }
 
         let details = {
-        displayItems: displayItems,
-        total: {
-            label: 'Total due',
-            amount: {currency: 'USD', value: String(total)}
-        },
-        // TODO PAY-7.2 - allow shipping options
-        shippingOptions: displayedShippingOptions
+            displayItems: displayItems,
+            total: {
+                label: 'Total due',
+                amount: { currency: 'USD', value: String(total) }
+            },
+            // TODO PAY-7.2 - allow shipping options
+            shippingOptions: displayedShippingOptions
         };
 
         return details;
@@ -155,15 +210,15 @@ export default class Cart extends React.Component {
     optionsForCountry(country) {
         country = country.toLowerCase();
         if (!country || !SHIPPING_OPTIONS.hasOwnProperty(country)) {
-          country = 'international';
+            country = 'international';
         }
         let options = SHIPPING_OPTIONS[country];
         // Sort by price, lowest first
         options.sort((a, b) => {
-          return a.price - b.price;
+            return a.price - b.price;
         });
         return options;
-      }
+    }
 
 
     render() {
@@ -218,8 +273,8 @@ export default class Cart extends React.Component {
                     </tbody>
                 </table>
                 <div className={styles.checkout}>
-                    <button onClick={() => this.onBuyClicked(cart)} 
-                    className={styles.checkout_button} disabled={total > 0 ? false: true}>Checkout</button>
+                    <button onClick={() => this.onBuyClicked(cart)}
+                        className={styles.checkout_button} disabled={total > 0 ? false : true}>Checkout</button>
                 </div>
             </div>
         )

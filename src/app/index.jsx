@@ -40,6 +40,8 @@ const reducer = (state=[], action) => {
                 }
             }
             return state;
+        case 'REMOVE_ALL':
+            return [];
         default:
             return state;
     }

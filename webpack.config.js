@@ -1,7 +1,7 @@
 let path = require('path');
 
 module.exports = {
-    mode: 'development',
+    mode: 'production',
     entry: './src/app/index.jsx',
     output: {
         path: path.join(__dirname, 'static/dist'),
@@ -33,15 +33,5 @@ module.exports = {
                 use: 'file-loader',
             }
         ]
-    },
-    devServer: {
-        port: 9999,
-        useLocalIp: true,
-        allowedHosts: [
-            '192.168.0.171',
-            '192.168.0.119'
-        ],
-        host: "0.0.0.0",
-        contentBase: path.join(__dirname, 'static')
     }
 }
