@@ -3,7 +3,7 @@
     src: url(/third_party/hallo_sans.otf) format("opentype");
     font-weight: 400;
     font-style: normal;
-    font-display: optional
+    font-display: fallback
 }
 
 @font-face {
