@@ -1,7 +1,6 @@
 import React from 'react';
 
 import styles from '../css/cart.css';
-import remove from '../img/trash.svg';
 
 const SHIPPING_OPTIONS = {
     us: [
